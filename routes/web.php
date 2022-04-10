@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('user', 'App\Http\Controllers\userController@user');
+Route::get('user', 'App\Http\Controllers\akunController@akun');
 Route::get('user/tambah', 'App\Http\Controllers\userController@tambah')->name('tambah');
 Route::get('user/add_user', 'App\Http\Controllers\userController@add_user')->name('add_user');
 Route::get('user/delete/{id}','App\Http\Controllers\userController@delete')->name('delete');
