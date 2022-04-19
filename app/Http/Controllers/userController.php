@@ -14,8 +14,8 @@ class userController extends Controller
     }
     public function delete($id)
     {
-        DB::table('users')->where('id', $id)->delete();
-        return redirect('user');
+        DB::table('akun')->where('id', $id)->delete();
+        return redirect('pegawai');
     }
     public function tambah()
     {

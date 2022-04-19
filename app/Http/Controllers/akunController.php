@@ -9,10 +9,8 @@ class akunController extends Controller
 {
     public function akun()
     {
-        // $user = DB::table('akun')->get();
-        // $user = DB::join('akun') SELECT * FROM akun JOIN mall on akun.id_mall =mall.id
-        $user = DB::select(DB::raw('SELECT akun.id,akun.nama, mall.nama as nama_mall, role.tipe as tipe FROM akun JOIN mall on akun.id_mall =mall.id JOIN role on role.id = akun.id_role;'));
-        return view('user', ['user' => $user]);
+        $akun = DB::select(DB::raw('SELECT akun.id,akun.nama, mall.nama as nama_mall, role.tipe as tipe FROM akun JOIN mall on akun.id_mall =mall.id JOIN role on role.id = akun.id_role;'));
+        return view('pegawai', ['akun' => $akun]);
     }
     public function delete($id)
     {
@@ -21,34 +19,39 @@ class akunController extends Controller
     }
     public function tambah()
     {
-        return view('tambah_user');
+        $mall = DB::table('mall')->get();
+        $role = DB::table('role')->get();
+        return view('tambah_pegawai', ['mall' => $mall, 'role' => $role]);
     }
 
     public function add_akun(Request $request)
     {
         DB::table('akun')->insert([
-            'plat' => $request->username,
-            'tempat_parkir' => $request->nama,
-            'masuk' => $request->nomor
+            'id' => NULL,
+            'nama' => $request->name,
+            'id_role' => $request->role_id,
+            'id_mall' => $request->mall_id
         ]);
 
-        return redirect('user');
+        return redirect('pegawai');
     }
 
     public function edit_akun($akun)
     {
         $data = DB::table('akun')->where('id', $akun)->get();
-        return view('/edit_akun', ['data' => $data]);
+        $mall = DB::table('mall')->get();
+        $role = DB::table('role')->get();
+        return view('/edit_pegawai', ['data' => $data, 'mall' => $mall, 'role' => $role]);
     }
 
     public function edit_akun_aksi(Request $request)
     {
-        DB::table('akuns')->where('akunname', $request->akunname)
+        DB::table('akun')->where('id', $request->id)
             ->update([
-                'akunname' => $request->akunname,
                 'nama' => $request->nama,
-                'nohp' => $request->nomor
+                'id_role' => $request->role_id,
+                'id_mall' => $request->mall_id
             ]);
-        return redirect('akun');
+        return redirect('pegawai');
     }
 }
