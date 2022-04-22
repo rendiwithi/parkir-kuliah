@@ -1,0 +1,16 @@
+body {
+    background-image: url('/assets/img/Sistem-Parkir-Efektif.jpg');
+    background-size: cover;
+}
+
+h3 {
+    text-shadow: 5px 5px 5px white;
+}
+
+.opacity {
+    filter: opacity(0.9);
+}
+
+.tombol {
+    filter: opacity(1);
+}
