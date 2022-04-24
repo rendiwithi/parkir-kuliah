@@ -24,6 +24,9 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                     <br>
                     <button class="btn waves-effect green">Cari</button>-->
                 </form>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success px-5">Lihat Ruang Parkir Kosong</button>
+                </div>
             </div>
         </div>
     </div>

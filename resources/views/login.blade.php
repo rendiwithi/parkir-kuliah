@@ -14,13 +14,13 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                 <div class="my-3">
                     <label for="exampleInputEmail1" class="form-label" for="desc">Username</label>
                     <div class="input-field">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan Username" required>
                     </div>
                 </div>
                 <div class="mb-3">
                      <label for="exampleInputPassword1" class="form-label" for="desc">Password</label>
                      <div class="input-field">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password" required>
                     </div>
                 </div>
                     <button type="submit" class="btn btn-success tombol">Login</button>
