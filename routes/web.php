@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // General
 Route::get('/', 'App\Http\Controllers\generalController@userView');
 Route::get('search','App\Http\Controllers\generalController@user_search')->name('user_search');
+Route::get('parkiran','App\Http\Controllers\generalController@parkir_kosong')->name('parkir_kosong');
 Route::get('login', 'App\Http\Controllers\generalController@loginView');
 Route::get('login/logic', 'App\Http\Controllers\generalController@login')->name('login');
 // admin masuk

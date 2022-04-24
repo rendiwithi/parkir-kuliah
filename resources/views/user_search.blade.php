@@ -16,30 +16,11 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mt-2">Cari</button>
-
-                    <!--<label style="color:black;font-size:100%" for="desc">Plat Nomot Anda :</label>
-                    <div class="input-field">
-                        <input type="text" name="plat" id="plat" required>
-                    </div>
-                    <br>
-                    <button class="btn waves-effect green">Cari</button>-->
                 </form>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success px-5">Lihat Ruang Parkir Kosong</button>
+                    <a href="/parkiran"><button type="submit" class="btn btn-success px-5">Lihat Ruang Parkir Kosong</button></a>
+                    
                 </div>
             </div>
         </div>
     </div>
-
-    <!--<h3 class="text-center my-5">Masukkan Kendaraan</h3>
-                <form class="card mx-auto p-2" style="width: 25rem;" method="get" action="/admin/masuk/add_kendaraan">
-                    {{csrf_field()}}
-                    <div class="row g-3 mx-auto">
-                        <div class="col-auto">
-                            <label for="inputPassword6" class="col-form-label">Plat Kendaraan</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" name="plat" id="plat" class="form-control" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-2">Add</button>-->

@@ -40,6 +40,11 @@ class generalController extends Controller
         $data = DB::select(DB::raw("SELECT dp.id,dp.plat, dp.masuk, dp.keluar, tp.kondisi,tp.id as tempat, p.nama as jenis_parkir, m.nama as mall FROM detail_parkir as dp JOIN tempat_parkir as tp on tp.id=dp.tempat_parkir join parkiran as p on p.id=tp.id_parkiran join mall as m on m.id=p.id_mall where isNull(dp.keluar) and dp.plat='$plat';"));
         return view('user_search_result', ['data' => $data]);
     }
+    public function parkir_kosong()
+    {
+        $data = DB::select(DB::raw("SELECT tp.nama, p.nama as jenis FROM tempat_parkir as tp JOIN parkiran as p ON p.id = tp.id_parkiran WHERE tp.kondisi=false ;"));
+        return view('parkir_kosong', ['data' => $data]);
+    }
     public function admin_masuk()
     {
         $data = DB::select(DB::raw('SELECT dp.id,dp.plat, dp.masuk, dp.keluar FROM detail_parkir as dp where isNull(dp.keluar);'));
