@@ -11,7 +11,7 @@ class parkirController extends Controller
 {
     public function parkir()
     {
-        $data = DB::select(DB::raw('SELECT dp.id,dp.plat, dp.masuk, dp.keluar, tp.kondisi,tp.id as tempat, p.nama as jenis_parkir, m.nama as mall FROM detail_parkir as dp JOIN tempat_parkir as tp on tp.id=dp.tempat_parkir join parkiran as p on p.id=tp.id_parkiran join mall as m on m.id=p.id_mall where isNull(dp.keluar);'));
+        $data = DB::select(DB::raw('SELECT dp.id,dp.plat, dp.masuk, dp.keluar, dp.harga, dp.tempat_parkir as tempat FROM detail_parkir as dp;'));
         return view('detail_parkir', ['data' => $data]);
     }
     public function delete($id, $tempat)
@@ -22,7 +22,6 @@ class parkirController extends Controller
             ->update([
                 'kondisi' => 0
             ]);
-
         DB::table('detail_parkir')->where('id', $id)->update([
             'keluar' => $date,
         ]);

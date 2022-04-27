@@ -20,22 +20,19 @@
          <th>Plat</th>
          <th>Masuk</th>
          <th>Keluar</th>
-         <th>Kondisi</th>
-         <th>Jenis Parkir</th>
-         <th>Nama Mall</th>
          <th>Aksi</th>
+         <th>Pendapatan</th>
       </tr>
-      <?php $no = 1; ?>
+      <?php $no = 1;
+      $pendapatan = 0; ?>
       @foreach ($data as $dp)
-      <?php if ($dp->kondisi || empty($dp->keluar)==true) {
-         $kondisi = "Ada Mobil";
-         $masuk = date('G:m:s',strtotime($dp->masuk));
+      <?php if (empty($dp->keluar) == true) {
+         $masuk = date('G:m:s', strtotime($dp->masuk));
          $keluar = "-";
       } else {
-         $kondisi = "Kosong";
-         $masuk = date('G:m:s',strtotime($dp->masuk));
-         $keluar = date('G:m:s',strtotime($dp->keluar));
-      }; ?>
+         $masuk = date('G:m:s', strtotime($dp->masuk));
+         $keluar = date('G:m:s', strtotime($dp->keluar));
+      }; $pendapatan+=$dp->harga?>
 
       <tr>
          <td>{{$no++}}</td>
@@ -43,15 +40,23 @@
          <td>{{$dp->plat}}</td>
          <td>{{$masuk}}</td>
          <td>{{$keluar}}</td>
-         <td>{{$kondisi}}</td>
-         <td>{{$dp->jenis_parkir}}</td>
-         <td>{{$dp->mall}}</td>
          <td>
             <a href="/parkir/delete/{{$dp->id}}/{{$dp->tempat}}" onclick="return confirm('Admin Yakin ingin mengeluarkanya?');"><button class="btn waves-effect red white-text">Keluar</button></a>
             <a href="/parkir/edit/{{$dp->plat}}"><button class="btn waves-effect orange white-text">Edit</button></a>
          </td>
       </tr>
       @endforeach
+      <?php 
+      $pendapatanF = number_format( $pendapatan, 2, '.', '.' ); ?>
+      <tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td>Total</td>
+         <td>Rp. {{$pendapatanF}}</td>
+      </tr>
       </tbody>
    </table>
    </div>

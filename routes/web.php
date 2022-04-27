@@ -33,7 +33,7 @@ Route::get('admin/lapangan/update','App\Http\Controllers\generalController@edit_
 
 //admin keluar
 Route::get('admin/keluar', 'App\Http\Controllers\generalController@admin_keluar');
-Route::get('admin/keluar/delete/{id}/{tempat}','App\Http\Controllers\generalController@delete')->name('delete');
+Route::get('admin/keluar/delete/{id}/{tempat}/{masuk}','App\Http\Controllers\generalController@delete')->name('delete');
 
 // Pegawai
 Route::get('pegawai', 'App\Http\Controllers\akunController@akun');

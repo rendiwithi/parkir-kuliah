@@ -21,8 +21,10 @@ class generalController extends Controller
                 return redirect('admin/masuk');
             } else if ($data[0]->tipe == "lapangan") {
                 return redirect('admin/lapangan');
-            } else {
+            } else if ($data[0]->tipe == "keluar") {
                 return redirect('admin/keluar');
+            } else {
+                return redirect('/parkir');
             }
         }
     }
@@ -36,7 +38,7 @@ class generalController extends Controller
     }
     public function user_search(Request $request)
     {
-        $plat=$request->plat;
+        $plat = $request->plat;
         $data = DB::select(DB::raw("SELECT dp.id,dp.plat, dp.masuk, dp.keluar, tp.kondisi,tp.id as tempat, p.nama as jenis_parkir, m.nama as mall FROM detail_parkir as dp JOIN tempat_parkir as tp on tp.id=dp.tempat_parkir join parkiran as p on p.id=tp.id_parkiran join mall as m on m.id=p.id_mall where isNull(dp.keluar) and dp.plat='$plat';"));
         return view('user_search_result', ['data' => $data]);
     }
@@ -52,7 +54,7 @@ class generalController extends Controller
     }
     public function admin_keluar()
     {
-        $data = DB::select(DB::raw('SELECT dp.id,dp.plat, dp.masuk, dp.keluar, tp.kondisi,tp.id as tempat, p.nama as jenis_parkir, m.nama as mall FROM detail_parkir as dp JOIN tempat_parkir as tp on tp.id=dp.tempat_parkir join parkiran as p on p.id=tp.id_parkiran join mall as m on m.id=p.id_mall where isNull(dp.keluar);'));
+        $data = DB::select(DB::raw('SELECT dp.id,dp.plat, dp.masuk, dp.keluar, dp.harga, dp.tempat_parkir as tempat FROM detail_parkir as dp WHERE isNull(dp.keluar);'));
         return view('admin_keluar', ['data' => $data]);
     }
     public function admin_lapangan()
@@ -109,17 +111,28 @@ class generalController extends Controller
         ]);
         return redirect('/admin/lapangan');
     }
-    public function delete($id, $tempat)
+    public function delete($id, $tempat, $masuk)
     {
         $dt = new DateTime();
         $date = $dt->format('Y-m-d H:i:s');
-        DB::table('tempat_parkir')->where('id', $tempat)
+        $masukF = strtotime($masuk);
+        $keluar = strtotime($date);
+
+        $jam = round(abs($keluar - $masukF) / 3600, 2);
+        if ($jam < 1) {
+            $jam = 1;   
+        }
+        if($tempat!="kosong"){
+            DB::table('tempat_parkir')->where('id', $tempat)
             ->update([
                 'kondisi' => 0
             ]);
+        }
+        $harga = $jam * 10000;
 
         DB::table('detail_parkir')->where('id', $id)->update([
             'keluar' => $date,
+            'harga' => $harga,
         ]);
         return redirect('admin/keluar');
     }
