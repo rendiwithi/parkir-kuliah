@@ -20,7 +20,6 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
       <h3 class="mt-2">Daftar Record Parkir</h3>
    </center>
    <!-- <h3>Tambah User<a class="right hide-on-med-and-down" href="{{URL('user/tambah')}}"><img src="assets/img/add.png" width="30" height="30" /></a></h3> -->
-   <a href="{{URL('parkir/tambah')}}"><button type="submit" class="btn btn-success m-2">Tambah</button></a>
    <table class="table table-striped table-hover table-bordered text-center" align="center">
       <thead class="table-primary">
       <tr>
@@ -29,7 +28,6 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
          <th>Plat</th>
          <th>Masuk</th>
          <th>Keluar</th>
-         <th>Aksi</th>
          <th>Pendapatan</th>
       </tr>
       </thead>
@@ -37,13 +35,17 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
       <?php $no = 1;
       $pendapatan = 0; ?>
       @foreach ($data as $dp)
-      <?php if (empty($dp->keluar) == true) {
+      <?php 
+      $harga = number_format( $dp->harga, 2, '.', '.' ); 
+      if (empty($dp->keluar) == true) {
          $masuk = date('G:m:s', strtotime($dp->masuk));
          $keluar = "-";
       } else {
          $masuk = date('G:m:s', strtotime($dp->masuk));
          $keluar = date('G:m:s', strtotime($dp->keluar));
-      }; $pendapatan+=$dp->harga?>
+      }; $pendapatan+=$dp->harga
+      ?>
+      ?>
 
       <tr>
          <td>{{$no++}}</td>
@@ -51,16 +53,12 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
          <td>{{$dp->plat}}</td>
          <td>{{$masuk}}</td>
          <td>{{$keluar}}</td>
-         <td>
-            <a href="/parkir/delete/{{$dp->id}}/{{$dp->tempat}}" onclick="return confirm('Admin Yakin ingin mengeluarkanya?');"><button class="btn btn-danger">Keluar</button></a>
-            <a href="/parkir/edit/{{$dp->plat}}"><button class="btn btn-warning mx-1">Edit</button></a>
-         </td>
+         <td>{{$harga}}</td>
       </tr>
       @endforeach
       <?php 
       $pendapatanF = number_format( $pendapatan, 2, '.', '.' ); ?>
       <tr>
-         <td></td>
          <td></td>
          <td></td>
          <td></td>
