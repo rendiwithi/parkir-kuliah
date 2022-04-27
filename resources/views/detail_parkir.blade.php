@@ -45,7 +45,6 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
          $keluar = date('G:m:s', strtotime($dp->keluar));
       }; $pendapatan+=$dp->harga
       ?>
-      ?>
 
       <tr>
          <td>{{$no++}}</td>
